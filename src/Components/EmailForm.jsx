@@ -5,6 +5,7 @@ import EmailCode from './EmailCode'
 import done from '../images/done.svg'
 import telegram from '../images/telegram.svg'
 import error from '../images/error.svg'
+import emailsAPI from '../requests/emails'
 
 
 function EmailForm({ translatedData }) {
@@ -17,6 +18,10 @@ function EmailForm({ translatedData }) {
     const [isEmailValid, setIsEmailValid] = useState(true)
 
     const [codeError, setCodeError] = useState(false)
+
+    const [otpCode, setOtpCode] = useState('')
+
+    const [userCode, setUserCode] = useState('')
 
     useEffect(() => {
 
@@ -40,10 +45,19 @@ function EmailForm({ translatedData }) {
 
     function sendEmail() {
         const code = generateRandomCode()
-        alert(code)
+        setOtpCode(code)
         const valid = validateEmail()
 
         if (valid === true) {
+
+            const res = emailsAPI.sendEmail(email, code)
+
+            res.then(response => {
+                if (response.status === 200) {
+                    setEmailStep(2)
+                }
+            })
+            
 
             setFormError(false)
         } else {
@@ -69,6 +83,16 @@ function EmailForm({ translatedData }) {
         const randomCode = Math.floor(Math.random() * (max - min + 1)) + min;
 
         return randomCode.toString();
+    }
+
+    function checkCode() {
+        if (userCode === otpCode) {
+            setFormPassed(true)
+            setFormError(false)
+            setEmailStep(3)
+        } else {
+            setCodeError(true)
+        }
     }
 
     return (
@@ -100,7 +124,7 @@ function EmailForm({ translatedData }) {
                     </div>
 
                     : emailStep === 2
-                        ? <div className='pt-[20px] md:pt-[200px]'>
+                        ? <div className='pt-[20px] md:pt-[50px] 2xl:pt-[200px]'>
                             <div className='flex justify-center'>
                                 <img className='w-[50px] md:w-[125px]' src={inbox} alt="Logotype" />
                             </div>
@@ -108,7 +132,7 @@ function EmailForm({ translatedData }) {
                             <p className='text-center text-white px-2 text-[14px] md:text-[20px] md:px-12'>{translatedData.step2Text}</p>
 
                             <div className='flex justify-center mt-2 md:mt-24'>
-                                <EmailCode />
+                                <EmailCode setUserCode={setUserCode} />
                             </div>
 
                             {
@@ -117,7 +141,7 @@ function EmailForm({ translatedData }) {
 
 
                             <div className='flex justify-center absolute bottom-8 left-0 right-0'>
-                                <button className='text-[#8D31E4] w-[180px] md:w-[375px] font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6]'>{translatedData.step2Button}</button>
+                                <button onClick={e => checkCode()} className='text-[#8D31E4] w-[180px] md:w-[375px] font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6]'>{translatedData.step2Button}</button>
                             </div>
                         </div>
                         : <div className='pt-5 md:pt-[100px]'>

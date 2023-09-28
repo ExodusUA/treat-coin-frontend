@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
-const EmailCode = () => {
+const EmailCode = ({setUserCode}) => {
     const [code, setCode] = useState(['', '', '', '', '', '']);
     const inputRefs = useRef([]);
 
@@ -38,6 +38,10 @@ const EmailCode = () => {
 
         setCode(updatedCode);
     };
+
+    useEffect(() => {
+        setUserCode(code.join(''));
+    }, [code]);
 
     return (
         <div className="flex space-x-2">

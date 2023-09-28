@@ -80,7 +80,7 @@ function Navbar({ translatedData }) {
                     <div className='bg-white p-4 rounded-[38px] text-center mt-4'>
                         <a href="#" target='_blank'><button className='w-full button-gradient px-[50px] py-[16px] text-white rounded-[18px]'>{translatedData.joinTreatCoinButtonText}</button></a>
                         <a href="#" className='relative top-2 underline text-[#282B54] text-[14px] text-center'>{translatedData.loginLinkText}</a>
-                    </div>∂
+                    </div>
 
                 </div>
             )}
