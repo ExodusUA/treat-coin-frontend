@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import React from 'react'
 import arrow from '../images/arrow.svg'
+import { useLanguage } from '../Helpers/LanguageContext'
 
 function LanguageChange() {
 
@@ -30,6 +31,13 @@ function LanguageChange() {
         }
     ]
 
+    const { language, changeLanguage } = useLanguage();
+
+    const handleLanguageChange = (newLanguage) => {
+        changeLanguage(newLanguage);
+    };
+
+
     return (
         <>
 
@@ -52,6 +60,7 @@ function LanguageChange() {
                                     <li onClick={e => {
                                         setSelectedLanguage(lang.code)
                                         setLanguageOpen(false)
+                                        handleLanguageChange(lang.code)
                                     }
                                     }>
                                         <div className='flex items-center gap-2 cursor-pointer'>

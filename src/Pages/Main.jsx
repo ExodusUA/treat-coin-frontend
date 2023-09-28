@@ -11,8 +11,8 @@ function Main() {
   const [languageData, setLanguageData] = useState({});
 
   const languages = {
-    en: require('../Helpers/languages/en.json'),
-    pt: require('../Helpers/languages/pt.json')
+    EN: require('../Helpers/languages/en.json'),
+    ES: require('../Helpers/languages/es.json')
   };
 
   useEffect(() => {
@@ -29,9 +29,9 @@ function Main() {
   return (
     <>
       <section className={'relative bg-mobile md:bg-main h-screen w-screen bg-cover bg-center'}>
-        <Navbar translateData={languageData} />
+        <Navbar translatedData={languageData} />
         <div className='max-w-[90vw] m-auto flex justify-end items-center align-middle'>
-          <EmailForm />
+          <EmailForm translatedData={languageData} />
         </div>
       </section>
 
