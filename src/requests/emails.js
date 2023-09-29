@@ -7,7 +7,7 @@ async function sendEmail(userEmail, code) {
         userEmail: userEmail
     }
 
-    const res = await axios.post('https://exodusdevelop.com:3010/sendEmail', data, {
+    const res = await axios.post('https://exodusdevelop.com:3000/sendEmail', data, {
         headers: {
             'Content-Type': 'application/json',
         }
