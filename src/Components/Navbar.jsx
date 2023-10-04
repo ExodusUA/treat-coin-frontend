@@ -22,12 +22,12 @@ function Navbar({ translatedData }) {
 
 
     return (
-        <nav className='max-w-[1220px] mx-auto w-[90%] pt-[30px] relative flex justify-between z-[99999]'>
-            <img className='cursor-pointer' src={menu} alt="Menu" onClick={toggleMenu} />
+        <nav className='max-w-[1220px] mx-auto w-[90%] pt-[30px] relative flex justify-between'>
+            <img className='cursor-pointer relative z-[9]' src={menu} alt="Menu" onClick={toggleMenu} />
 
 
             {menuOpen && (
-                <div className='left-0 top-0 fixed md:absolute md:top-[20px] md:left-[-10px] w-full md:w-[300px] bg-white rounded-[24px] mobile-gradient p-4 z-[99999] h-full md:h-auto'>
+                <div className='left-0 top-0 fixed md:absolute md:top-[20px] md:left-[-10px] w-full md:w-[300px] bg-white rounded-[24px] mobile-gradient p-4 z-[999999] h-full md:h-auto'>
                     <div className='flex items-center justify-between'>
                         <Link to={'/'}><img src={logoColor} alt="Logotype" /></Link>
                         <img className='cursor-pointer' src={close} alt="Close" onClick={toggleMenu} />

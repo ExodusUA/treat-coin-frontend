@@ -34,7 +34,7 @@ function Mission() {
       <Navbar translatedData={languageData} />
 
 
-      <div className='flex justify-center fixed w-screen left-0 top-7'>
+      <div className='flex justify-center fixed top-7 w-[160px] m-auto left-0 right-0 z-[999]'>
         <Link to={'/'}>
           <img src={LogoColor} alt='Logotype' />
         </Link>
