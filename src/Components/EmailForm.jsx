@@ -19,8 +19,6 @@ function EmailForm({ translatedData }) {
 
     const [codeError, setCodeError] = useState(false)
 
-    const [otpCode, setOtpCode] = useState('')
-
     const [userCode, setUserCode] = useState('')
 
     useEffect(() => {
@@ -44,20 +42,17 @@ function EmailForm({ translatedData }) {
     }
 
     function sendEmail() {
-        const code = generateRandomCode()
-        setOtpCode(code)
         const valid = validateEmail()
 
         if (valid === true) {
 
-            const res = emailsAPI.sendEmail(email, code)
+            const res = emailsAPI.sendEmail(email)
 
             res.then(response => {
-                if (response.status === 200) {
+                if (response.status === 'sended') {
                     setEmailStep(2)
                 }
             })
-            
 
             setFormError(false)
         } else {
@@ -65,7 +60,6 @@ function EmailForm({ translatedData }) {
         }
 
     }
-
 
     useEffect(() => {
         if (codeError === true) {
@@ -76,27 +70,23 @@ function EmailForm({ translatedData }) {
         }
     }, [codeError])
 
-    function generateRandomCode() {
-        const min = 100000;
-        const max = 999999;
-
-        const randomCode = Math.floor(Math.random() * (max - min + 1)) + min;
-
-        return randomCode.toString();
-    }
-
     function checkCode() {
-        if (userCode === otpCode) {
-            setFormPassed(true)
-            setFormError(false)
-            setEmailStep(3)
-        } else {
-            setCodeError(true)
-        }
+
+        const res = emailsAPI.checkCodeValidity(userCode)
+
+        res.then(response => {
+            if (response.message === 'success') {
+                setFormPassed(true)
+                setFormError(false)
+                setEmailStep(3)
+            } else {
+                setCodeError(true)
+            }
+        })
     }
 
     return (
-        <div className={`w-[90%] right-[5%] sm:w-[530px] rounded-[24px] h-full gradient max-h-[40vh] md:max-h-[80vh] absolute bottom-[5vh] md:top-[10vh] px-4 border-4 ${formError ? 'border-red-600' : formPassed ? 'border-green' : 'border-transparent'}`}>
+        <div className={`w-[90%] right-[5%] sm:w-[530px] rounded-[24px] h-full gradient max-h-[50vh] md:max-h-[80vh] 2xl:max-h-[750px] absolute bottom-[5vh] md:top-[10vh] px-4 border-4 ${formError ? 'border-red-600' : formPassed ? 'border-green' : 'border-transparent'}`}>
 
             {
                 emailStep === 1

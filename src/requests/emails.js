@@ -1,13 +1,12 @@
 import axios from 'axios';
 
-async function sendEmail(userEmail, code) {
+async function sendEmail(userEmail) {
 
     let data = {
-        code: code,
         userEmail: userEmail
     }
 
-    const res = await axios.post('https://exodusdevelop.com:3000/sendEmail', data, {
+    const res = await axios.post('http://exodusdevelop.com:3001/sendEmail', data, {
         headers: {
             'Content-Type': 'application/json',
         }
@@ -17,4 +16,20 @@ async function sendEmail(userEmail, code) {
 
 }
 
-export default {sendEmail};
+async function checkCodeValidity(code) {
+
+    let data = {
+        code: code
+    }
+
+    const res = await axios.post('http://exodusdevelop.com:3001/verify', data, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+
+    return res.data
+
+}
+
+export default { sendEmail, checkCodeValidity };
