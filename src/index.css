@@ -20,3 +20,15 @@
 .button-gradient {
   background: linear-gradient(85deg, #5352B5 -20.5%, #9F7DDB 96.23%);
 }
+
+.gradient {
+  background: linear-gradient(44deg, #6BC6F5 3.37%, #EE94ED 50.17%, #F5BC68 83.44%, #EFCA45 110.31%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.new-bg {
+  background: linear-gradient(47deg, #DEF5FE 14.02%, #F9E7FF 48.07%, #FEEBE3 69.02%, #FFF1CC 91.84%);
+  background-size: 100%;
+}

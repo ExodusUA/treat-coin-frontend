@@ -12,7 +12,9 @@ function Main() {
 
   const languages = {
     EN: require('../Helpers/languages/en.json'),
-    ES: require('../Helpers/languages/es.json')
+    ES: require('../Helpers/languages/es.json'),
+    PT: require('../Helpers/languages/pt.json'),
+    HI: require('../Helpers/languages/hi.json'),
   };
 
   useEffect(() => {

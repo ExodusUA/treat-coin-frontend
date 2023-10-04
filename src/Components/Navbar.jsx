@@ -4,6 +4,7 @@ import logoColor from '../images/LogoColor.svg';
 import close from '../images/close.svg';
 import arrow from '../images/arrow.svg';
 import LanguageChange from './LanguageChange';
+import { Link } from 'react-router-dom';
 
 function Navbar({ translatedData }) {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -30,11 +31,12 @@ function Navbar({ translatedData }) {
                     </div>
 
                     <ul className='mt-2'>
+
                         <li className='py-2 border-b-[1px] border-[#3735A080]'>
-                            <a className='text-black text-[18px] font-medium' href='#'>{translatedData.aboutUsLinkText}</a>
+                            <Link className='text-black text-[18px] font-medium' to='/about'>{translatedData.aboutUsLinkText}</Link>
                         </li>
                         <li className='py-2 border-b-[1px] border-[#3735A080]'>
-                            <a className='text-black text-[18px] font-medium' href='#'>{translatedData.ourMissionLinkText}</a>
+                            <Link className='text-black text-[18px] font-medium' to='/mission'>{translatedData.ourMissionLinkText}</Link>
                         </li>
                         <li className='py-2 border-b-[1px] border-[#3735A080]'>
                             <a className='text-black text-[18px] font-medium' href='#'>{translatedData.termsAndConditionsLinkText}</a>
