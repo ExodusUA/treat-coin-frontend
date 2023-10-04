@@ -2,7 +2,8 @@ import React from 'react'
 import { useLanguage } from '../Helpers/LanguageContext'
 import { useEffect, useState } from 'react'
 import Navbar from '../Components/Navbar'
-import footer_image from '../images/footerImage.svg'
+import LogoColor from '../images/LogoColor.svg'
+import { Link } from 'react-router-dom'
 
 
 function Mission() {
@@ -31,6 +32,13 @@ function Mission() {
   return (
     <section className={'relative new-bg md:bg-main h-screen w-screen bg-cover bg-center xl:overflow-hidden'}>
       <Navbar translatedData={languageData} />
+
+
+      <div className='flex justify-center fixed w-screen left-0 top-7'>
+        <Link to={'/'}>
+          <img src={LogoColor} alt='Logotype' />
+        </Link>
+      </div>
 
       <div className='bg-[#141629] mt-6 h-full'>
         <div className='pt-14 w-[90%] max-w-[1240px] m-auto h-full relative'>
