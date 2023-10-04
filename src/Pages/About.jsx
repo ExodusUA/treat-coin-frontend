@@ -34,20 +34,24 @@ function About() {
 
             <div className='bg-[#141629] mt-6 h-full'>
                 <div className='pt-14 w-[90%] max-w-[1240px] m-auto relative h-full'>
-                    <div className="text-center text-sky-300 text-[44px] font-bold font-['Poppins'] leading-[48.40px] gradient mb-14">{languageData.AboutTitle}</div>
+                    <div className="text-center text-sky-300 text-[44px] font-bold font-['Poppins'] leading-[48.40px] gradient-text mb-14">{languageData.AboutTitle}</div>
 
                     <p className='text-white mb-4 leading-7'>{languageData.AboutParagraph1}</p>
                     <p className='text-white mb-4 leading-7'>{languageData.AboutParagraph2}</p>
                     <p className='text-white mb-4 leading-7'>{languageData.AboutParagraph3}</p>
 
 
-                    <div className='flex items-center gap-6 absolute right-0 bottom-4 xl:bottom-28'>
+                    {
+                        /*
+                        <div className='flex items-center gap-6 absolute right-0 bottom-4 xl:bottom-28'>
                         <div>
                             <p className='text-center text-white'>© TreatBot.io</p>
                             <p className='text-[#7674F5]'>All Rights Reserved 2023</p>
                         </div>
                         <img src={footer_image} alt="Footer Image" />
                     </div>
+                        */
+                    }
                 </div>
             </div>
         </section>

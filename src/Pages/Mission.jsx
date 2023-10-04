@@ -34,20 +34,24 @@ function Mission() {
 
       <div className='bg-[#141629] mt-6 h-full'>
         <div className='pt-14 w-[90%] max-w-[1240px] m-auto h-full relative'>
-          <div className="text-center text-sky-300 text-[44px] font-bold font-['Poppins'] leading-[48.40px] gradient mb-14">{languageData.MissionTitle}</div>
+          <div className="text-center text-sky-300 text-[44px] font-bold font-['Poppins'] leading-[48.40px] gradient-text mb-14">{languageData.MissionTitle}</div>
 
           <p className='text-white mb-4 leading-7'>{languageData.MissionText1}</p>
           <p className='text-white mb-4 leading-7'>{languageData.MissionText2}</p>
           <p className='text-white mb-4 leading-7'>{languageData.MissionText3}</p>
 
 
-          <div className='flex items-center gap-6 absolute right-0 bottom-28'>
+          {
+            /*
+            <div className='flex items-center gap-6 absolute right-0 bottom-28'>
             <div>
               <p className='text-center text-white'>© TreatBot.io</p>
               <p className='text-[#7674F5]'>All Rights Reserved 2023</p>
             </div>
             <img src={footer_image} alt="Footer Image" />
           </div>
+            */
+          }
         </div>
 
       </div>
