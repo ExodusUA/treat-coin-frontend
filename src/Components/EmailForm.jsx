@@ -127,7 +127,7 @@ function EmailForm({ translatedData }) {
                         </div>
                         <p className='text-[14px] md:text-[20px] max-w-[375px] m-auto text-center leading-5 text-white mt-5 font-regular'>{translatedData.step1Title}</p>
 
-                        <ReCAPTCHA ref={recaptchaRef} sitekey="6LdelYsoAAAAAO8UrGoj04l2yL-d2Kn-CSnvk28Q" size="invisible">
+                        <ReCAPTCHA ref={recaptchaRef} sitekey="6Lc7KZslAAAAAFQb1-mYofj0wi4IQ6lE-UqHwn-5" size="invisible">
                             <form onSubmit={e => handleSubmit(e)}>
                                 <div className='md:w-[367px] m-auto mt-4 relative'>
                                     <p className='text-white mb-2'>{translatedData.step1EMail}</p>
