@@ -6,7 +6,7 @@ async function checkCaptcha(token) {
         token: token
     }
 
-    const res = await axios.post('http://146.59.14.103:3001/captchaVerify', data, {
+    const res = await axios.post(process.env.REACT_APP_API_URL + '/captchaVerify', data, {
         headers: {
             'Content-Type': 'application/json',
         }

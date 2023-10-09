@@ -41,12 +41,7 @@ function Navbar({ translatedData }) {
                         <li className='py-2 border-b-[1px] border-[#3735A080]'>
                             <Link className='text-black text-[18px] font-medium' to='/mission'>{translatedData.ourMissionLinkText}</Link>
                         </li>
-                        <li className='py-2 border-b-[1px] border-[#3735A080]'>
-                            <Link className='text-black text-[18px] font-medium' to='#'>{translatedData.termsAndConditionsLinkText}</Link>
-                        </li>
-                        <li className='py-2 border-b-[1px] border-[#3735A080]'>
-                            <Link className='text-black text-[18px] font-medium' to='#'>{translatedData.privacyPolicyLinkText}</Link>
-                        </li>
+                        
                     </ul>
 
                     <div className='relative mt-4'>
