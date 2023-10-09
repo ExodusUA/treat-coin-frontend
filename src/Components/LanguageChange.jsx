@@ -6,7 +6,7 @@ import { useLanguage } from '../Helpers/LanguageContext'
 function LanguageChange() {
 
     const [languageOpen, setLanguageOpen] = useState(false)
-    const [selectedLanguage, setSelectedLanguage] = useState('EN')
+    const [selectedLanguage, setSelectedLanguage] = useState(localStorage.getItem('language') || 'EN')
 
     const langs = [
         {

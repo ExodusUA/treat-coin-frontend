@@ -6,7 +6,7 @@ async function sendEmail(userEmail) {
         userEmail: userEmail
     }
 
-    const res = await axios.post('https://exodusdevelop.com:3001/sendEmail', data, {
+    const res = await axios.post('http://146.59.14.103:3001/sendEmail', data, {
         headers: {
             'Content-Type': 'application/json',
         }
@@ -22,7 +22,7 @@ async function checkCodeValidity(code) {
         code: code
     }
 
-    const res = await axios.post('https://exodusdevelop.com:3001/verify', data, {
+    const res = await axios.post('http://146.59.14.103:3001/verify', data, {
         headers: {
             'Content-Type': 'application/json',
         }
