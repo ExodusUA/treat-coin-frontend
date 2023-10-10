@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-async function sendEmail(userEmail) {
+async function sendEmail(userEmail, token) {
 
     let data = {
-        userEmail: userEmail
+        userEmail: userEmail,
+        token: token
     }
 
     const res = await axios.post(process.env.REACT_APP_API_URL + '/sendEmail', data, {

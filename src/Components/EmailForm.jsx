@@ -6,7 +6,6 @@ import done from '../images/done.svg'
 import telegram from '../images/telegram.svg'
 import error from '../images/error.svg'
 import emailsAPI from '../requests/emails'
-import captchaAPI from '../requests/captcha'
 import MarketingPopup from './MarketingPopup'
 import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from 'react-router-dom'
@@ -50,14 +49,14 @@ function EmailForm({ translatedData }) {
 
     }
 
-    function sendEmail() {
+    function sendEmail(token) {
         const valid = validateEmail()
 
         setUserExist(false)
 
         if (valid === true) {
 
-            const res = emailsAPI.sendEmail(email)
+            const res = emailsAPI.sendEmail(email, token)
 
             res.then(response => {
                 if (response.status === 'sended') {
@@ -65,6 +64,10 @@ function EmailForm({ translatedData }) {
                 } else if (response.status === 'exist') {
                     setFormError(true)
                     setUserExist(true)
+                } else if (response.message === 'invalid token') {
+                    setFormError(true)
+                    setCaptchaPassed(false)
+                    alert('Invalid captcha token')
                 }
             })
 
@@ -104,14 +107,10 @@ function EmailForm({ translatedData }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const token = await recaptchaRef.current.executeAsync();
 
-        const res = await captchaAPI.checkCaptcha(token)
-        if (res.message === 'success') {
-            sendEmail()
-        } else {
-            alert('Captcha failed')
-        }
+        const token = await recaptchaRef.current.executeAsync();
+        sendEmail(token)
+
     };
 
     return (
