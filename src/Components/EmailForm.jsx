@@ -199,7 +199,7 @@ function EmailForm({ translatedData }) {
                             <p className='text-center text-white text-[14px] md:text-[20px] px-2 md:px-12'>{translatedData.step3Text}</p>
 
                             <div className='flex justify-center absolute bottom-8 left-0 right-0'>
-                                <Link to={'https://t.me/treatcoin'} target='_blank'>
+                                <Link to={'https://t.me/treatcoinglobal'} target='_blank'>
                                     <button className='text-[#8D31E4] w-[250px] md:w-[375px] flex justify-center gap-4 font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6] items-center'>
                                         <p>{translatedData.step3Button}</p>
                                         <img className='w-7 h-7' src={telegram} alt="Telegram" />
