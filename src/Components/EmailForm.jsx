@@ -9,7 +9,7 @@ import emailsAPI from '../requests/emails'
 import MarketingPopup from './MarketingPopup'
 import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from 'react-router-dom'
-import loadingImage from '../images/loading.svg'
+import OverlaySpinner from './OverlaySpinner'
 
 
 function EmailForm({ translatedData }) {
@@ -154,9 +154,7 @@ function EmailForm({ translatedData }) {
                                 </div>
                                 <div className='flex justify-center absolute bottom-4 xl:bottom-8 left-0 right-0'>
                                     <button type='submit' disabled={loading} className='text-[#8D31E4] px-4 min-w-[180px] md:w-[375px] font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6] items-center flex gap-2 justify-center'>
-                                        {
-                                            loading && <img className='w-5 h-5' src={loadingImage} alt="Loading" />
-                                        }
+                                        
                                         <p>{translatedData.step1Button}</p>
                                     </button>
                                 </div>
@@ -180,16 +178,15 @@ function EmailForm({ translatedData }) {
                                 <EmailCode setUserCode={setUserCode} />
                             </div>
 
+                            <p className='text-[12px] text-center text-white mt-6'>{translatedData.Step2Note}</p>
+
                             {
                                 codeError && <p className='text-center text-red-600 mt-2 text-[14px] md:mt-4'>{translatedData.step2WrongCode}</p>
                             }
 
-
                             <div className='flex justify-center absolute bottom-8 left-0 right-0'>
                                 <button onClick={e => checkCode()} className='text-[#8D31E4] w-[180px] md:w-[375px] font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6] items-center flex gap-2 justify-center'>
-                                    {
-                                        loading && <img className='w-5 h-5' src={loadingImage} alt="Loading" />
-                                    }
+                                  
                                     <p>{translatedData.step2Button}</p>
                                 </button>
                             </div>
@@ -215,6 +212,10 @@ function EmailForm({ translatedData }) {
 
             {
                 <MarketingPopup showPopup={showPopup} setShowPopup={setShowPopup} />
+            }
+
+            {
+               <OverlaySpinner loading={loading} />
             }
         </div >
     )
