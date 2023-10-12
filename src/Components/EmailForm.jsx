@@ -9,6 +9,7 @@ import emailsAPI from '../requests/emails'
 import MarketingPopup from './MarketingPopup'
 import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from 'react-router-dom'
+import loadingImage from '../images/loading.svg'
 
 
 function EmailForm({ translatedData }) {
@@ -27,6 +28,8 @@ function EmailForm({ translatedData }) {
     const [codeError, setCodeError] = useState(false)
 
     const [userCode, setUserCode] = useState('')
+
+    const [loading, setLoading] = useState(false)
 
 
     useEffect(() => {
@@ -51,7 +54,7 @@ function EmailForm({ translatedData }) {
 
     function sendEmail(token) {
         const valid = validateEmail()
-
+        setLoading(true)
         setUserExist(false)
 
         if (valid === true) {
@@ -61,16 +64,19 @@ function EmailForm({ translatedData }) {
             res.then(response => {
                 if (response.status === 'sended') {
                     setEmailStep(2)
+                    setLoading(false)
                 } else if (response.status === 'exist') {
                     setFormError(true)
+                    setLoading(false)
                     setUserExist(true)
                 } else if (response.message === 'invalid token') {
                     setFormError(true)
+                    setLoading(false)
                     setCaptchaPassed(false)
                     alert('Invalid captcha token')
                 }
             })
-
+           
             setFormError(false)
         } else {
             setFormError(true)
@@ -88,7 +94,7 @@ function EmailForm({ translatedData }) {
     }, [codeError])
 
     function checkCode() {
-
+        setLoading(true)
         const res = emailsAPI.checkCodeValidity(userCode)
 
         res.then(response => {
@@ -99,6 +105,8 @@ function EmailForm({ translatedData }) {
             } else {
                 setCodeError(true)
             }
+
+            setLoading(false)
         })
     }
 
@@ -144,9 +152,14 @@ function EmailForm({ translatedData }) {
                                     </div>
 
                                 </div>
-
+∂
                                 <div className='flex justify-center absolute bottom-4 xl:bottom-8 left-0 right-0'>
-                                    <button type='submit' className='text-[#8D31E4] px-4 min-w-[180px] md:w-[375px] font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6]'>{translatedData.step1Button}</button>
+                                    <button type='submit' disabled={loading} className='text-[#8D31E4] px-4 min-w-[180px] md:w-[375px] font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6] items-center flex gap-2 justify-center'>
+                                       {
+                                        loading &&  <img className='w-5 h-5' src={loadingImage} alt="Loading" />
+                                       }
+                                        <p>{translatedData.step1Button}</p>
+                                    </button>
                                 </div>
                             </form>
                         </ReCAPTCHA>
