@@ -122,13 +122,13 @@ function EmailForm({ translatedData }) {
     };
 
     return (
-        <div className={`w-[90%] right-[5%] sm:w-[530px] rounded-[24px] h-full gradient max-h-[47vh] md:max-h-[80vh] 2xl:max-h-[750px] absolute bottom-[5vh] md:top-[10vh] px-4 border-4 ${formError ? 'border-red-600' : formPassed ? 'border-green' : 'border-transparent'}`}>
+        <div className={`w-[90%] right-[5%] sm:w-[530px] rounded-[24px] h-full gradient max-h-[47vh] md:max-h-[80vh] 2xl:max-h-[750px] absolute bottom-[5vh] md:top-[5vh] px-4 border-4 min-h-[385px] ${formError ? 'border-red-600' : formPassed ? 'border-green' : 'border-transparent'}`}>
 
             {
                 emailStep === 1
                     ?
 
-                    <div className='pt-[20px] md:pt-[150px] 2xl:pt-[200px] '>
+                    <div className='pt-[30px] md:pt-[150px] 2xl:pt-[200px] '>
                         <div className='flex justify-center'>
                             <img className='w-[70%] md:w-auto' src={logotype} alt="Logotype" />
                         </div>
@@ -152,9 +152,8 @@ function EmailForm({ translatedData }) {
                                     </div>
 
                                 </div>
-                                <div className='flex justify-center absolute bottom-4 xl:bottom-8 left-0 right-0'>
+                                <div className='flex justify-center left-0 right-0 mt-4'>
                                     <button type='submit' disabled={loading} className='text-[#8D31E4] px-4 min-w-[180px] md:w-[375px] font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6] items-center flex gap-2 justify-center'>
-
                                         <p>{translatedData.step1Button}</p>
                                     </button>
                                 </div>
