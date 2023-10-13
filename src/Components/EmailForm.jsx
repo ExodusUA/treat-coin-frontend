@@ -14,7 +14,7 @@ import OverlaySpinner from './OverlaySpinner'
 
 function EmailForm({ translatedData }) {
 
-    const [emailStep, setEmailStep] = useState(3)
+    const [emailStep, setEmailStep] = useState(1)
     const [formError, setFormError] = useState(false)
     const [formPassed, setFormPassed] = useState(false)
     const [userExist, setUserExist] = useState(false)
