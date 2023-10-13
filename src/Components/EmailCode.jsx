@@ -48,7 +48,7 @@ const EmailCode = ({setUserCode}) => {
             {code.map((value, index) => (
                 <input
                     key={index}
-                    type="text"
+                    type="number"
                     value={value}
                     className="w-[33px] h-[44px] md:w-[66px] md:h-[88px] p-2 text-center rounded-md border-2 border-[#EA81B6] outline-none text-[#8D31E4] text-[20px] md:text-[56px] font-bold"
                     onChange={(e) => handleInputChange(e, index)}

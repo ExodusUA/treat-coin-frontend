@@ -153,7 +153,7 @@ function EmailForm({ translatedData }) {
 
                                 </div>
                                 <div className='flex justify-center left-0 right-0 mt-4 md:mt-16'>
-                                    <button type='submit' disabled={loading} className='text-[#8D31E4] px-4 min-w-[180px] md:w-[375px] font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6] items-center flex gap-2 justify-center'>
+                                    <button type='submit' disabled={loading} className='text-[#8D31E4] cursor-pointer  px-4 min-w-[180px] md:w-[375px] font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6] items-center flex gap-2 justify-center'>
                                         <p>{translatedData.step1Button}</p>
                                     </button>
                                 </div>
@@ -184,7 +184,7 @@ function EmailForm({ translatedData }) {
                             }
 
                             <div className='flex justify-center absolute bottom-8 left-0 right-0'>
-                                <button onClick={e => checkCode()} className='text-[#8D31E4] w-[180px] md:w-[375px] font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6] items-center flex gap-2 justify-center'>
+                                <button onClick={e => checkCode()} className='text-[#8D31E4] w-[180px] md:w-[375px] font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6] items-center flex gap-2 justify-center cursor-pointer '>
 
                                     <p>{translatedData.step2Button}</p>
                                 </button>
