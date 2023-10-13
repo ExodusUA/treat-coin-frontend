@@ -14,7 +14,7 @@ import OverlaySpinner from './OverlaySpinner'
 
 function EmailForm({ translatedData }) {
 
-    const [emailStep, setEmailStep] = useState(1)
+    const [emailStep, setEmailStep] = useState(3)
     const [formError, setFormError] = useState(false)
     const [formPassed, setFormPassed] = useState(false)
     const [userExist, setUserExist] = useState(false)
@@ -122,7 +122,7 @@ function EmailForm({ translatedData }) {
     };
 
     return (
-        <div className={`w-[90%] right-[5%] sm:w-[530px] rounded-[24px] h-full gradient max-h-[47vh] md:max-h-[80vh] 2xl:max-h-[750px] absolute bottom-[5vh] md:top-[5vh] px-4 border-4 min-h-[385px] ${formError ? 'border-red-600' : formPassed ? 'border-green' : 'border-transparent'}`}>
+        <div className={`w-[90%] right-[5%] sm:w-[530px] rounded-[24px] h-full gradient max-h-[4vh] md:max-h-[80vh] 2xl:max-h-[750px] absolute bottom-[5vh] md:top-[5vh] px-4 border-4 min-h-[395px] ${formError ? 'border-red-600' : formPassed ? 'border-green' : 'border-transparent'}`}>
 
             {
                 emailStep === 1
@@ -166,14 +166,14 @@ function EmailForm({ translatedData }) {
 
 
                     : emailStep === 2
-                        ? <div className='pt-[20px] md:pt-[50px] 2xl:pt-[150px]'>
+                        ? <div className='pt-[20px] md:pt-[50px] 2xl:pt-[100px]'>
                             <div className='flex justify-center'>
                                 <img className='w-[50px] md:w-[125px]' src={inbox} alt="Logotype" />
                             </div>
                             <p className='text-center text-white text-[24px] md:text-[40px] font-bold my-2'>{translatedData.step2Title}</p>
                             <p className='text-center text-white px-2 text-[14px] md:text-[20px] md:px-12'>{translatedData.step2Text}</p>
 
-                            <div className='flex justify-center mt-2 md:mt-24'>
+                            <div className='flex justify-center mt-2 md:mt-8'>
                                 <EmailCode setUserCode={setUserCode} />
                             </div>
 
@@ -183,8 +183,8 @@ function EmailForm({ translatedData }) {
                                 codeError && <p className='text-center text-red-600 mt-2 text-[14px] md:mt-4'>{translatedData.step2WrongCode}</p>
                             }
 
-                            <div className='flex justify-center absolute bottom-8 left-0 right-0'>
-                                <button onClick={e => checkCode()} className='text-[#8D31E4] w-[180px] md:w-[375px] font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6] items-center flex gap-2 justify-center cursor-pointer '>
+                            <div className='flex justify-center left-0 right-0 mt-4 md:mt-16'>
+                                <button onClick={e => checkCode()} className='text-[#8D31E4] w-[250px] md:w-[375px] font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6] items-center flex gap-2 justify-center cursor-pointer '>
 
                                     <p>{translatedData.step2Button}</p>
                                 </button>
@@ -199,7 +199,7 @@ function EmailForm({ translatedData }) {
 
                             <div className='flex justify-center absolute bottom-8 left-0 right-0'>
                                 <Link to={'https://t.me/treatcoinglobal'} target='_blank'>
-                                    <button className='text-[#8D31E4] w-[250px] md:w-[375px] flex justify-center gap-4 font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6] items-center'>
+                                    <button className='text-[#8D31E4] w-[300px] md:w-[375px] flex justify-center gap-4 font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6] items-center'>
                                         <p>{translatedData.step3Button}</p>
                                         <img className='w-7 h-7' src={telegram} alt="Telegram" />
                                     </button>
