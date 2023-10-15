@@ -33,4 +33,20 @@ async function checkCodeValidity(code) {
 
 }
 
-export default { sendEmail, checkCodeValidity };
+async function checkIfUserExists(userEmail, token) {
+
+    let data = {
+        userEmail: userEmail,
+        token: token
+    }
+
+    const res = await axios.post(process.env.REACT_APP_API_URL + '/checkEmail', data, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+
+    return res.data
+}
+
+export default { sendEmail, checkCodeValidity, checkIfUserExists };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import logotype from '../images/logotype.svg'
 import inbox from '../images/inbox.svg'
 import EmailCode from './EmailCode'
@@ -10,6 +10,8 @@ import MarketingPopup from './MarketingPopup'
 import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from 'react-router-dom'
 import OverlaySpinner from './OverlaySpinner'
+import GoogleAuth from './GoogleAuth'
+import FacebookAuth from './FacebookAuth'
 
 
 function EmailForm({ translatedData }) {
@@ -18,7 +20,7 @@ function EmailForm({ translatedData }) {
     const [formError, setFormError] = useState(false)
     const [formPassed, setFormPassed] = useState(false)
     const [userExist, setUserExist] = useState(false)
-    const recaptchaRef = React.createRef();
+    const recaptchaRef = useRef(null);
 
     const [showPopup, setShowPopup] = useState(false)
 
@@ -35,7 +37,7 @@ function EmailForm({ translatedData }) {
     useEffect(() => {
 
         if (isEmailValid === false) {
-            validateEmail()
+           validateEmail()
         }
     }, [email])
 
@@ -115,48 +117,112 @@ function EmailForm({ translatedData }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         const token = await recaptchaRef.current.executeAsync();
         sendEmail(token)
-
     };
 
+    const loginViaGoogle = async (email) => {
+        
+        const token = await recaptchaRef.current.executeAsync();
+        const res = emailsAPI.checkIfUserExists(email, token)
+
+        res.then(response => {
+            if (response.status === 'not exist') {
+                setEmailStep(3)
+                setLoading(false)
+            } else if (response.status === 'exist') {
+                setFormError(true)
+                setLoading(false)
+                setUserExist(true)
+            } else if (response.message === 'invalid token') {
+                setFormError(true)
+                setLoading(false)
+                setCaptchaPassed(false)
+                alert('Invalid captcha token')
+            }
+        })
+
+        setFormError(false)
+    }
+
+    const loginViaFacebook = async (email) => {
+        const token = await recaptchaRef.current.executeAsync();
+        const res = emailsAPI.checkIfUserExists(email, token)
+
+        res.then(response => {
+            if (response.status === 'not exist') {
+                setEmailStep(3)
+                setLoading(false)
+            } else if (response.status === 'exist') {
+                setFormError(true)
+                setLoading(false)
+                setUserExist(true)
+            } else if (response.message === 'invalid token') {
+                setFormError(true)
+                setLoading(false)
+                setCaptchaPassed(false)
+                alert('Invalid captcha token')
+            }
+        })
+        setFormError(false)
+    }
+
+
+
+
     return (
-        <div className={`w-[90%] right-[5%] sm:w-[530px] rounded-[24px] h-full gradient max-h-[4vh] md:max-h-[80vh] 2xl:max-h-[750px] absolute bottom-[5vh] md:top-[5vh] px-4 border-4 min-h-[395px] ${formError ? 'border-red-600' : formPassed ? 'border-green' : 'border-transparent'}`}>
+        <div className={`w-[90%] right-[5%] sm:w-[530px] rounded-[24px] h-full gradient max-h-[4vh] md:max-h-[80vh] 2xl:max-h-[750px] absolute bottom-[5vh] md:top-[5vh] px-4 border-4 min-h-[510px] ${formError ? 'border-red-600' : formPassed ? 'border-green' : 'border-transparent'}`}>
 
             {
                 emailStep === 1
                     ?
 
-                    <div className='pt-[30px] md:pt-[150px] 2xl:pt-[200px] '>
+                    <div className='pt-[30px] md:pt-[120px] 2xl:pt-[150px] '>
                         <div className='flex justify-center'>
                             <img className='w-[70%] md:w-auto' src={logotype} alt="Logotype" />
                         </div>
-                        <p className='text-[14px] md:text-[20px] max-w-[375px] m-auto text-center leading-5 text-white mt-5 font-regular'>{translatedData.step1Title}</p>
+                        <p className='text-[14px] md:text-[20px] max-w-[375px] m-auto text-center leading-5 text-white mt-5 font-regular'>
+                            <span>{translatedData.step1Title1}</span>
+                            <span className='text-[#07FF78] font-bold'>{translatedData.step1Title2}</span>
+                            <span>{translatedData.step1Title3}</span>
+                            <span className='text-[#07FF78] font-bold'>{translatedData.step1Title4}</span>
+                            <span>{translatedData.step1Title5}</span>
+                            <span className='text-[#07FF78] font-bold'>{translatedData.step1Title6}</span>
+                            <span>{translatedData.step1Title7}</span>
+                            <span className='text-[#07FF78] font-bold'>{translatedData.step1Title8}</span>
+                            <span>{translatedData.step1Title9}</span>
+
+                        </p>
 
                         <ReCAPTCHA ref={recaptchaRef} sitekey={process.env.REACT_APP_RECAPTCHA_CLIENT_KEY} size="invisible">
                             <form onSubmit={e => handleSubmit(e)}>
+
                                 <div className='md:w-[367px] m-auto mt-4 relative'>
-                                    <p className='text-white mb-2'>{translatedData.step1EMail}</p>
+                                    <p className='text-white mb-4 font-bold'>{translatedData.step1EMail}</p>
+
+                                    <div className='justify-center left-0 right-0 mt-4 '>
+                                        <div className='flex justify-between md:w-[375px] m-auto'>
+                                            <FacebookAuth loginViaFacebook={loginViaFacebook} setLoading={setLoading} />
+                                            <GoogleAuth loginViaGoogle={loginViaGoogle} setLoading={setLoading} />
+                                        </div>
+                                    </div>
+
+                                    <p className='text-white mb-2 font-bold mt-4 '>{translatedData.step1EMailOr}</p>
 
                                     <input onChange={e => setEmail(e.target.value)} value={email} className='w-full h-[56px] pr-[40px] bg-white text-gray-700 placeholder:text-gray-500 outline-none text-[16px] pl-3 rounded-[7px]' type="email" placeholder={translatedData.step1EMailPlaceholder} />
                                     {
                                         isEmailValid === false && <p className='text-[#ED1111] text-[12px] mt-2'>{translatedData.step1WrongEmail}</p>
-                                    }
-                                    {
-                                        isEmailValid === false && <img className='w-6 h-6 absolute bottom-[43px] right-3' src={error} alt="Error" />
                                     }
 
                                     <div className='mt-4'>
                                         <p className='text-[10px] text-gray-200'>By providing your email to <b>TreatCoin.com</b> you agree to our <span className='underline cursor-pointer' onClick={e => setShowPopup(true)}>Marketing Terms</span></p>
                                     </div>
 
-                                </div>
-                                <div className='flex justify-center left-0 right-0 mt-4 md:mt-16'>
-                                    <button type='submit' disabled={loading} className='text-[#8D31E4] cursor-pointer  px-4 min-w-[180px] md:w-[375px] font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6] items-center flex gap-2 justify-center'>
+                                    <button type='submit' disabled={loading} className='text-[#8D31E4] cursor-pointer mt-4 px-4 min-w-[180px] md:w-[375px] font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6] items-center flex gap-2 justify-center'>
                                         <p>{translatedData.step1Button}</p>
                                     </button>
                                 </div>
+
                             </form>
                         </ReCAPTCHA>
                         {
