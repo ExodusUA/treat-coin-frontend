@@ -6,7 +6,7 @@ function FacebookAuth({ loginViaFacebook, setLoading }) {
 
     function getFacebookEmail(data) {
         setLoading(true)
-        loginViaFacebook(data.email)
+        loginViaFacebook(data.data.email)
     }
 
     return (
