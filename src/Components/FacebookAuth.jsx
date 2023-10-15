@@ -10,7 +10,7 @@ function FacebookAuth({ loginViaFacebook, setLoading }) {
     }
 
     return (
-        <LoginSocialFacebook appId="356492313416801" onResolve={(response) => {
+        <LoginSocialFacebook appId={process.env.REACT_APP_FACEBOOK_APP_ID} onResolve={(response) => {
             getFacebookEmail(response)
         }} 
         onReject={(response) => {

@@ -1,5 +1,4 @@
 import React from 'react'
-import jwt_decode from "jwt-decode";
 import google from '../images/google.svg';
 import { LoginSocialGoogle } from 'reactjs-social-login';
 
@@ -7,7 +6,7 @@ function GoogleAuth({ loginViaGoogle, setLoading }) {
 
     return (
         <>
-            <LoginSocialGoogle client_id="337924305474-bb0pojq3rv0sbmamimuqjpmb3svtco1e.apps.googleusercontent.com" onResolve={(response) => {
+            <LoginSocialGoogle client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID} onResolve={(response) => {
                 setLoading(true)
                 loginViaGoogle(response.data.email)
             }}
