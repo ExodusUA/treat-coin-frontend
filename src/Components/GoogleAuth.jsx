@@ -6,7 +6,7 @@ function GoogleAuth({ loginViaGoogle, setLoading }) {
 
     return (
         <>
-            <LoginSocialGoogle client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID} onResolve={(response) => {
+            <LoginSocialGoogle scope='https://www.googleapis.com/auth/userinfo.email' client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID} onResolve={(response) => {
                 setLoading(true)
                 loginViaGoogle(response.data.email)
             }}
