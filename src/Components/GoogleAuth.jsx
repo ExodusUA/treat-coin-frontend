@@ -8,6 +8,8 @@ function GoogleAuth({ loginViaGoogle, setLoading }) {
         <>
             <LoginSocialGoogle scope='https://www.googleapis.com/auth/userinfo.email' client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID} onResolve={(response) => {
                 setLoading(true)
+                console.log(response.data)
+                console.log('Google Email: ', response.data.email)
                 loginViaGoogle(response.data.email)
             }}
                 onReject={(response) => {
