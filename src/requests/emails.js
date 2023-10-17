@@ -49,4 +49,10 @@ async function checkIfUserExists(userEmail, token) {
     return res.data
 }
 
-export default { sendEmail, checkCodeValidity, checkIfUserExists };
+async function getUserCountry() {
+    const res = await axios.get('https://geosvc.globalmailer.com/mygeoipinfo?json=1')
+    return res.data.data.country
+}
+
+
+export default { sendEmail, checkCodeValidity, checkIfUserExists, getUserCountry };

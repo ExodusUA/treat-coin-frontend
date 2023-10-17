@@ -3,6 +3,7 @@ import Navbar from '../Components/Navbar'
 import EmailForm from '../Components/EmailForm'
 import { useLanguage } from '../Helpers/LanguageContext'
 import { useEffect, useState } from 'react'
+import API from '../requests/emails'
 
 
 function Main() {
@@ -27,6 +28,11 @@ function Main() {
     let pageNumber = window.location.pathname.split('/')[1].replace('page', '');
     setSelectedPage(Number(pageNumber));
   }, [selectedPage]);
+
+  useEffect(() => {
+const res = API.getUserCountry()
+console.log(res)
+  }, []);
 
   return (
     <>
