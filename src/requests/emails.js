@@ -1,57 +1,51 @@
 import axios from 'axios';
 
-async function sendEmail(userEmail, token) {
-
+async function sendEmail(userEmail, token, sendEmail) {
     let data = {
         userEmail: userEmail,
-        token: token
+        token: token,
+        sendEmail: sendEmail ? 1 : 0
     }
-
-    const res = await axios.post(process.env.REACT_APP_API_URL + '/sendEmail', data, {
+    const res = await axios.post(`https://user.treatcoin.com/sendEmail`, data, {
         headers: {
             'Content-Type': 'application/json',
         }
     })
-
     return res.data
-
 }
 
 async function checkCodeValidity(code) {
-
     let data = {
         code: code
     }
-
-    const res = await axios.post(process.env.REACT_APP_API_URL + '/verify', data, {
+    const res = await axios.post('https://user.treatcoin.com/verify', data, {
         headers: {
             'Content-Type': 'application/json',
         }
     })
-
     return res.data
-
 }
 
 async function checkIfUserExists(userEmail, token) {
 
-    let data = {
+    return sendEmail(userEmail, token, false);
+    /*let data = {
         userEmail: userEmail,
         token: token
     }
 
-    const res = await axios.post(process.env.REACT_APP_API_URL + '/checkEmail', data, {
+    const res = await axios.post('https://user.treatcoin.com/checkEmail', data, {
         headers: {
             'Content-Type': 'application/json',
         }
     })
 
-    return res.data
+    return res.data*/
 }
 
 async function getUserCountry() {
-    const res = await axios.get('https://geosvc.globalmailer.com/mygeoipinfo?json=1')
-    return res.data.data.country
+    const res = await axios.get('https://geosvc.globalmailer.com/mygeoipinfo?json=1&corsdef=1')
+    return res.data.Data.country
 }
 
 

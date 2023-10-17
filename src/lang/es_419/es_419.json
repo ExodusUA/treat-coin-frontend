@@ -1,13 +1,13 @@
 {
-    "step1Title1": "Únete a nuestra ",
+    "step1Title1": "Únete a nuestra",
     "step1Title2": "Lista de espera ",
-    "step1Title3": "y gana mucho ",
-    "step1Title4": "dinero ",
-    "step1Title5": "y gana increíble ",
+    "step1Title3": "y gana mucho",
+    "step1Title4": "dinero",
+    "step1Title5": "y gana increíble",
     "step1Title6": "premios ",
     "step1Title7": "recomendando tus amigos y completando  ",
-    "step1Title8": "divertidas ",
-    "step1Title9": "actividades ",
+    "step1Title8": "divertidas",
+    "step1Title9": "actividades",
     "step1EMail": "Únete a nuestra lista de espera con:",
     "step1EMailOr": "O correo electrónico:",
     "step1EMailPlaceholder": "Inserte su correo electrónico aquí",
@@ -45,8 +45,5 @@
     "MissionTitle": "Misión de TreatCoin",
     "MissionText1": "TreatCoin es una plataforma que crea una nueva experiencia social de consumo digital, donde tanto el cliente como el negocio ganan más.",
     "MissionText2": "La misión de TreatCoin es permitir a los usuarios disfrutar haciendo sus acciones cotidianas online y ganar dinero por ello, y así proporcionar clientes más felices, comprometidos y mejor valorados a las empresas con las que colaboramos.",
-    "MissionText3": "Con TreatCoin, estar online es más gratificante que nunca.",
-    "TermsText1": "Al proporcionar su correo electrónico a ",
-    "TermsText2": " acepta nuestros",
-    "MarketingTerms": " Términos de Marketing"
+    "MissionText3": "Con TreatCoin, estar online es más gratificante que nunca."
 }

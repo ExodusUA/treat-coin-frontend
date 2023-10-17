@@ -37,7 +37,7 @@ function EmailForm({ translatedData }) {
     useEffect(() => {
 
         if (isEmailValid === false) {
-           validateEmail()
+            validateEmail()
         }
     }, [email])
 
@@ -54,14 +54,14 @@ function EmailForm({ translatedData }) {
 
     }
 
-    function sendEmail(token) {
+    function submitEmail(email, token, sendEmail) {
         const valid = validateEmail()
         setLoading(true)
         setUserExist(false)
 
         if (valid === true) {
 
-            const res = emailsAPI.sendEmail(email, token)
+            const res = emailsAPI.sendEmail(email, token, sendEmail)
 
             res.then(response => {
                 if (response.status === 'sended') {
@@ -118,13 +118,13 @@ function EmailForm({ translatedData }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const token = await recaptchaRef.current.executeAsync();
-        sendEmail(token)
+        submitEmail(email, token, true)
     };
 
     const loginViaGoogle = async (email) => {
-        
+        console.log('Google Email: ', email)
         const token = await recaptchaRef.current.executeAsync();
-        const res = emailsAPI.checkIfUserExists(email, token)
+        const res = emailsAPI.sendEmail(email, token, false)
 
         res.then(response => {
             if (response.status === 'not exist') {
@@ -146,8 +146,9 @@ function EmailForm({ translatedData }) {
     }
 
     const loginViaFacebook = async (email) => {
+        console.log('Facebook Email: ', email)
         const token = await recaptchaRef.current.executeAsync();
-        const res = emailsAPI.checkIfUserExists(email, token)
+        const res = emailsAPI.sendEmail(email, token, false)
 
         res.then(response => {
             if (response.status === 'not exist') {
@@ -167,17 +168,11 @@ function EmailForm({ translatedData }) {
         setFormError(false)
     }
 
-
-
-
     return (
-        <div className={`w-[90%] right-[5%] sm:w-[530px] rounded-[24px] h-full gradient max-h-[4vh] md:max-h-[80vh] 2xl:max-h-[750px] absolute bottom-[5vh] md:top-[5vh] px-4 border-4 min-h-[510px] ${formError ? 'border-red-600' : formPassed ? 'border-green' : 'border-transparent'}`}>
-
+        <div className={`w-[90%] right-[5%] sm:w-[530px] rounded-[24px] h-full gradient max-h-[4vh] md:max-h-[80vh] 2xl:max-h-[750px] absolute bottom-[5vh] md:top-[5vh] px-4 border-4 min-h-[560px] sm:min-h-[600px] ${formError ? 'border-red-600' : formPassed ? 'border-green' : 'border-transparent'}`}>
             {
                 emailStep === 1
-                    ?
-
-                    <div className='pt-[30px] md:pt-[120px] 2xl:pt-[150px] '>
+                    ? <div className='pt-[30px] md:pt-[50px] 2xl:pt-[150px] '>
                         <div className='flex justify-center'>
                             <img className='w-[70%] md:w-auto' src={logotype} alt="Logotype" />
                         </div>
@@ -194,12 +189,11 @@ function EmailForm({ translatedData }) {
 
                         </p>
 
-                        <ReCAPTCHA ref={recaptchaRef} sitekey={process.env.REACT_APP_RECAPTCHA_CLIENT_KEY} size="invisible">
+                        <ReCAPTCHA ref={recaptchaRef} sitekey='6LfpgJMoAAAAAJUxDeXx8uhBOXmKbmvsLr5vo8qY' size="invisible">
                             <form onSubmit={e => handleSubmit(e)}>
 
                                 <div className='md:w-[367px] m-auto mt-4 relative'>
                                     <p className='text-white mb-4 font-bold'>{translatedData.step1EMail}</p>
-
                                     <div className='justify-center left-0 right-0 mt-4 '>
                                         <div className='flex justify-between md:w-[375px] m-auto'>
                                             <FacebookAuth loginViaFacebook={loginViaFacebook} setLoading={setLoading} />
@@ -215,7 +209,7 @@ function EmailForm({ translatedData }) {
                                     }
 
                                     <div className='mt-4'>
-                                        <p className='text-[10px] text-gray-200'>By providing your email to <b>TreatCoin.com</b> you agree to our <span className='underline cursor-pointer' onClick={e => setShowPopup(true)}>Marketing Terms</span></p>
+                                        <p className='text-[10px] text-gray-200'>{translatedData.TermsText1} <b>TreatCoin.com</b> {translatedData.TermsText2} <span className='underline cursor-pointer' onClick={e => setShowPopup(true)}>{translatedData.MarketingTerms}</span></p>
                                     </div>
 
                                     <button type='submit' disabled={loading} className='text-[#8D31E4] cursor-pointer mt-4 px-4 min-w-[180px] md:w-[375px] font-bold m-auto bg-white h-[48px] rounded-[32px] border-2 border-[#EA81B6] items-center flex gap-2 justify-center'>
